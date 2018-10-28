@@ -7,12 +7,13 @@ RUN apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr
 
 # Load languages
 RUN apt-get install -y \
-  tesseract-ocr-jpn
+  tesseract-ocr-chi-sim
 
 ADD . $GOPATH/src/github.com/otiai10/ocrserver
 WORKDIR $GOPATH/src/github.com/otiai10/ocrserver
 RUN go get ./...
 RUN go get -t github.com/otiai10/gosseract
 RUN go test -v github.com/otiai10/gosseract
-
+RUN chmod -R 777 $GOPATH
+EXPOSE 8080
 CMD $GOPATH/bin/ocrserver
