@@ -1,5 +1,5 @@
 FROM golang:1.9
-
+ENV PORT 8080
 MAINTAINER otiai10 <otiai10@gmail.com>
 
 RUN apt-get -qq update
@@ -15,5 +15,5 @@ RUN go get ./...
 RUN go get -t github.com/otiai10/gosseract
 RUN go test -v github.com/otiai10/gosseract
 RUN chmod -R 777 $GOPATH
-EXPOSE 8080
+EXPOSE $PORT
 CMD $GOPATH/bin/ocrserver
